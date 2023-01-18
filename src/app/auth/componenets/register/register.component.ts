@@ -40,10 +40,13 @@ export class RegisterComponent {
     this.authService.register(request).subscribe({
       next: (currentUser) => {
         console.log('currentUser',currentUser);
+        this.authService.setToken(currentUser);
+        this.authService.setCurrentUser(currentUser);
       },
-      error: (err) => {
-        console.log('err',err)
+      error: (err: HttpErrorResponse) => {
+        console.log('err',err.error);
+        this.errorMessage = err.error.join(', ');
       }
-    })
+    });
   }
 }

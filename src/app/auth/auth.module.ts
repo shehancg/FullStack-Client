@@ -3,6 +3,7 @@ import { AuthService } from "./services/auth.service";
 import { RegisterComponent } from "./componenets/register/register.component";
 import { Routes, RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
 
 const routes:Routes = [
     {
@@ -12,7 +13,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes),ReactiveFormsModule],
+    imports: [RouterModule.forChild(routes),ReactiveFormsModule, CommonModule],
     providers: [AuthService],
     declarations: [RegisterComponent],
 })
