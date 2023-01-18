@@ -45,7 +45,11 @@ export class RegisterComponent {
       },
       error: (err: HttpErrorResponse) => {
         console.log('err',err.error);
-        this.errorMessage = err.error.join(', ');
+        if (err.error) {
+          this.errorMessage = Object.values(err.error).join(', ');
+      } else {
+          this.errorMessage = "Something went wrong";
+      }
       }
     });
   }
