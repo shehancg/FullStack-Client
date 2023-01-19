@@ -13,12 +13,19 @@ export class AppComponent implements OnInit{
       next: (currentUser) => {
         this.authService.setCurrentUser(currentUser);
         // REMEBER TO REMOVE THIS 
-        console.log('res',currentUser);
+        //console.log('res',currentUser);
     },
     error: (err) => {
       console.log('err',err);
       this.authService.setCurrentUser(null);
     },
     });
+    // this.authService.currentUser$.subscribe((res) => {
+    //   console.log('res', res);
+    // });
+
+    // this.authService.isLogged$.subscribe((isLoggedIn) => {
+    //   console.log('isLoggedIn', isLoggedIn);
+    // });
   }  
 }
