@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
 import { BoardsService } from "src/app/shared/services/boards.service";
 import { BoardService } from "../../services/board.service";
 import { Observable, filter } from "rxjs";
 import { BoardInterface } from "src/app/shared/types/board.interface";
+import { SocketService } from "src/app/shared/services/socket.service";
+import { SocketEventEnum } from "src/app/shared/types/socketEvents.enum";
 
 @Component({
     selector: 'board',
@@ -15,7 +17,9 @@ export class BoardComponent implements OnInit{
 
     constructor(private boardsService: BoardsService,
         private route: ActivatedRoute,
-        private boardService: BoardService){
+        private boardService: BoardService,
+        private socketService: SocketService,
+        private router: Router,){
             const boardId = this.route.snapshot.paramMap.get('boardId');
 
             if(!boardId){
@@ -25,8 +29,20 @@ export class BoardComponent implements OnInit{
             this.board$ = this.boardService.board$.pipe(filter(Boolean));
         }
 
-    ngOnInit(): void {       
+    ngOnInit(): void {   
+        this.socketService.emit(SocketEventEnum.boardsJoin, {boardId: this.boardId});    
         this.fetchData();
+        this.initializeListeners();
+    }
+
+    initializeListeners(): void {
+        this.router.events.subscribe((event) => {
+          if (event instanceof NavigationStart) {
+            console.log('Leaving the Page');
+            this.boardService.leaveBoard(this.boardId)
+            //this.boardService.leaveBoard(this.boardId);
+          }
+        });
     }
 
     fetchData(): void {
