@@ -38,7 +38,7 @@ export class BoardComponent implements OnInit{
     initializeListeners(): void {
         this.router.events.subscribe((event) => {
           if (event instanceof NavigationStart) {
-            console.log('Leaving the Page');
+            //console.log('Leaving the Page');
             this.boardService.leaveBoard(this.boardId)
             //this.boardService.leaveBoard(this.boardId);
           }
@@ -48,6 +48,13 @@ export class BoardComponent implements OnInit{
     fetchData(): void {
         this.boardsService.getBoard(this.boardId).subscribe((board) => {
             this.boardService.setBoard(board)
+        });
+    }
+
+    test(): void{
+        this.socketService.emit('columns:create',{
+            boardId:this.boardId,
+            title: 'Demo',
         });
     }
 }
