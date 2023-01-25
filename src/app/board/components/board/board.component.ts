@@ -8,6 +8,8 @@ import { SocketService } from "src/app/shared/services/socket.service";
 import { SocketEventEnum } from "src/app/shared/types/socketEvents.enum";
 import { ColumnsService } from "src/app/shared/services/columns.service";
 import { ColumnInterface } from "src/app/shared/types/column.interface";
+import { ColumnInputInterface } from 'src/app/shared/types/columnInput.interface';
+
 
 
 @Component({
@@ -58,6 +60,11 @@ export class BoardComponent implements OnInit{
             //this.boardService.leaveBoard(this.boardId);
           }
         });
+        this.socketService
+        .listen<ColumnInterface>(SocketEventEnum.columnsCreateSuccess)
+        .subscribe((column) => {
+        this.boardService.addColumn(column);
+      });
     }
 
     fetchData(): void {
@@ -75,5 +82,13 @@ export class BoardComponent implements OnInit{
     //         title: 'Demo',
     //     });
     // }
+
+    createColumn(title: string): void {
+      const columnInput: ColumnInputInterface = {
+        title,
+        boardId: this.boardId,
+      };
+      this.columnsService.createColumn(columnInput);
+    }
 }
 

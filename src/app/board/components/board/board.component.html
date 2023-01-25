@@ -8,6 +8,13 @@
             {{column.title}}
         </div>
     </div>
-    INLINE FORM FOR UPDATING COLUMN
+    <inline-form
+      class="create-column-form"
+      defaultText="Add a List"
+      [hasButton]="true"
+      buttonText="Add List"
+      inputPlaceholder="Add Column Name"
+      (handleSubmit)="createColumn($event)">
+    </inline-form>
     </div>
 </div>
