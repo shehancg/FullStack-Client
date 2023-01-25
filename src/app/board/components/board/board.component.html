@@ -1,4 +1,13 @@
-Board
-{{board$| async | json}}
+<app-topbar></app-topbar>
 
-<button (click)="test()">TEST</button>
+<div class="board" *ngIf="data$ | async as data">
+  <div class="board-header-container">INLINE FORM BOARD</div>
+  <div class="columns">
+    <div class="column" *ngFor="let column of data.columns">
+        <div class="column-title">
+            {{column.title}}
+        </div>
+    </div>
+    INLINE FORM FOR UPDATING COLUMN
+    </div>
+</div>
