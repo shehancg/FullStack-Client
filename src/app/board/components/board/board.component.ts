@@ -9,7 +9,9 @@ import { SocketEventEnum } from "src/app/shared/types/socketEvents.enum";
 import { ColumnsService } from "src/app/shared/services/columns.service";
 import { ColumnInterface } from "src/app/shared/types/column.interface";
 import { ColumnInputInterface } from 'src/app/shared/types/columnInput.interface';
-
+import { TaskInterface } from "src/app/shared/types/task.interface";
+import { TasksService } from "src/app/shared/services/task.service";
+import { TaskInputInterface } from 'src/app/shared/types/taskinput.interface';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class BoardComponent implements OnInit{
     data$: Observable<{
         board: BoardInterface;
         columns: ColumnInterface[];
+        tasks: TaskInterface[];
       }>;
 
     constructor(private boardsService: BoardsService,
@@ -28,7 +31,8 @@ export class BoardComponent implements OnInit{
         private boardService: BoardService,
         private socketService: SocketService,
         private router: Router,
-        private columnsService: ColumnsService){
+        private columnsService: ColumnsService,
+        private tasksService: TasksService){
             const boardId = this.route.snapshot.paramMap.get('boardId');
 
             if(!boardId){
@@ -37,11 +41,13 @@ export class BoardComponent implements OnInit{
             this.boardId = boardId;
             this.data$ = combineLatest([
                 this.boardService.board$.pipe(filter(Boolean)),
-                this.boardService.columns$
+                this.boardService.columns$,
+                this.boardService.tasks$,
               ]).pipe(
-                map(([board, columns]) => ({
+                map(([board, columns, tasks]) => ({
                   board,
-                  columns
+                  columns,
+                  tasks
                 }))
               );
         }
@@ -65,6 +71,11 @@ export class BoardComponent implements OnInit{
         .subscribe((column) => {
         this.boardService.addColumn(column);
       });
+      this.socketService
+      .listen<TaskInterface>(SocketEventEnum.tasksCreateSuccess)
+      .subscribe((task) => {
+        this.boardService.addTask(task);
+      });
     }
 
     fetchData(): void {
@@ -73,7 +84,10 @@ export class BoardComponent implements OnInit{
         });
         this.columnsService.getColumns(this.boardId).subscribe((columns) => {
             this.boardService.setColumns(columns);
-        });    
+        }); 
+        this.tasksService.getTasks(this.boardId).subscribe((tasks) => {
+          this.boardService.setTasks(tasks);
+        });   
     }
 
     // test(): void{
@@ -89,6 +103,19 @@ export class BoardComponent implements OnInit{
         boardId: this.boardId,
       };
       this.columnsService.createColumn(columnInput);
+    }
+
+    createTask(title: string, columnId: string): void {
+      const taskInput: TaskInputInterface = {
+        title,
+        boardId: this.boardId,
+        columnId,
+      };
+      this.tasksService.createTask(taskInput);
+    }
+
+    getTasksByColumn(columnId: string, tasks: TaskInterface[]): TaskInterface[] {
+      return tasks.filter((task) => task.columnId === columnId);
     }
 }
 
