@@ -29,4 +29,7 @@ export class BoardsService{
     this.socketService.emit(SocketEventEnum.boardsUpdate, { boardId, fields });
   }
 
+  deleteBoard(boardId: string): void {
+    this.socketService.emit(SocketEventEnum.boardsDelete, { boardId });
+  }
 }

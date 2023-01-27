@@ -19,4 +19,23 @@ export class ColumnsService {
   createColumn(columnInput: ColumnInputInterface): void {
     this.socketService.emit(SocketEventEnum.columnsCreate, columnInput);
   }
+
+  deleteColumn(boardId: string, columnId: string): void {
+    this.socketService.emit(SocketEventEnum.columnsDelete, {
+      boardId,
+      columnId,
+    });
+  }
+
+  updateColumn(
+    boardId: string,
+    columnId: string,
+    fields: { title: string }
+  ): void {
+    this.socketService.emit(SocketEventEnum.columnsUpdate, {
+      boardId,
+      columnId,
+      fields,
+    });
+  }
 }
