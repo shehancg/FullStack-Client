@@ -65,4 +65,26 @@ export class BoardService {
       });
       this.columns$.next(updatedColumns);
     }
+
+    updateTask(updatedTask: TaskInterface): void {
+      const updatedTasks = this.tasks$.getValue().map((task) => {
+        if (task.id === updatedTask.id) {
+          return {
+            ...task,
+            title: updatedTask.title,
+            description: updatedTask.description,
+            columnId: updatedTask.columnId,
+          };
+        }
+        return task;
+      });
+      this.tasks$.next(updatedTasks);
+    }
+
+    deleteTask(taskId: string): void {
+      const updatedTasks = this.tasks$
+        .getValue()
+        .filter((task) => task.id !== taskId);
+      this.tasks$.next(updatedTasks);
+    }
 }

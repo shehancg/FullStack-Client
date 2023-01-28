@@ -67,7 +67,7 @@ export class BoardComponent implements OnInit, OnDestroy{
 
     initializeListeners(): void {
         this.router.events.subscribe((event) => {
-          if (event instanceof NavigationStart) {
+          if (event instanceof NavigationStart && !event.url.includes('/boards/')) {
             //console.log('Leaving the Page');
             this.boardService.leaveBoard(this.boardId)
             //this.boardService.leaveBoard(this.boardId);
@@ -103,10 +103,24 @@ export class BoardComponent implements OnInit, OnDestroy{
       });
 
       this.socketService
+      .listen<TaskInterface>(SocketEventEnum.tasksUpdateSuccess)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((updatedTask) => {
+        this.boardService.updateTask(updatedTask);
+      });
+
+      this.socketService
       .listen<BoardInterface>(SocketEventEnum.boardsUpdateSuccess)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((updatedBoard) => {
         this.boardService.updateBoard(updatedBoard);
+      });
+
+      this.socketService
+      .listen<string>(SocketEventEnum.tasksDeleteSuccess)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((taskId) => {
+        this.boardService.deleteTask(taskId)
       });
 
       this.socketService
@@ -175,6 +189,10 @@ export class BoardComponent implements OnInit, OnDestroy{
       this.columnsService.updateColumn(this.boardId, columnId, {
         title: columnName,
       });
+    }
+
+    openTask(taskId: string): void {
+      this.router.navigate(['boards', this.boardId, 'tasks', taskId]);
     }
 }
 
