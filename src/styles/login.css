@@ -5,12 +5,14 @@
   text-align: center;
   flex-direction: column;
   justify-content: space-between;
-  /* height: 100vh; */
+  background: linear-gradient(#28afd7,#3172d5);
+  height: 100vh;
 }
 
 .trello-main-logo {
   display: block;
-  height: 43px;
+  height: 100px;
+  width: 200px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -19,8 +21,9 @@
 
 .form-container {
   background-color: #ffffff;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 25px 40px 32px 40px;
+  margin-bottom: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
   max-width: 400px;
   font-family: "Avenir", Helvetica, Arial, sans-serif;

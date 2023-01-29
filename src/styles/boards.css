@@ -3,6 +3,8 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+  /* background: linear-gradient(#28afd7,#3172d5); */
+  height: 100vh;
 }
 
 .home-left-sidebar {
@@ -26,6 +28,7 @@
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .boards-side-menu-option-selected {
@@ -36,6 +39,7 @@
   color: #0079bf;
   border-radius: 4px;
   margin-bottom: 5px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .boards-section-container {
@@ -60,23 +64,28 @@
   display: inline-block;
   line-height: 24px;
   margin: 4px 0 11px 8px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
+  color: #172b4d;
 }
 
 .board-tile-list {
   display: flex;
   flex-wrap: wrap;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
 }
 
 .board-tile {
   width: 23%;
   margin: 0 2% 2% 0;
-  background: #00adcc;
+  background: linear-gradient(#28afd7,#3172d5);
   color: #fff;
   line-height: 20px;
   padding: 8px;
@@ -85,6 +94,7 @@
   border-radius: 3px;
   height: 80px;
   cursor: pointer;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .board-tile:hover {
@@ -100,4 +110,5 @@
   width: 100%;
   word-wrap: break-word;
   color: #fff;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }

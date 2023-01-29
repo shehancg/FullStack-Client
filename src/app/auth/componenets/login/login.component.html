@@ -1,9 +1,9 @@
 <div class="login-page">
     <a routerLink="/">
-      <img src="/assets/trello-logo.svg" class="trello-main-logo" />
+      <img src="/assets/projectio-logo.png" class="trello-main-logo" />
     </a>
     <div class="form-container">
-      <div class="login-header">Login to Trello</div>
+      <div class="login-header">Login to Project.IO</div>
       <div class="errors" *ngIf="errorMessage">{{ errorMessage }}</div>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <input
