@@ -8,6 +8,7 @@ import { SocketService } from './shared/services/socket.service';
   //styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+  title = 'Project.IO';
   constructor(private authService: AuthService, private socketService: SocketService){}
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe({
