@@ -16,7 +16,7 @@
   background: rgba(0, 0, 0, 0.5);
 }
 .task-modal-container {
-  background: #f4f5f7;
+  background: #e4f0f6;
   z-index: 2;
   margin-left: auto;
   margin-right: auto;
@@ -36,6 +36,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-close {
@@ -56,6 +57,7 @@
 .task-modal-edit-title-form .inline-form-text {
   font-size: 20px;
   font-weight: 600;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-edit-title-form .inline-form-input {
@@ -68,10 +70,12 @@
   border-radius: 3px;
   height: 30px;
   padding: 7px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-edit-description-form {
   cursor: pointer;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-edit-description-form .inline-form-input {
@@ -84,6 +88,7 @@
   border-radius: 3px;
   padding: 7px;
   height: 150px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-edit-description-form .inline-form-button {
@@ -100,7 +105,8 @@
   border: 0px;
   margin-top: 10px;
   cursor: pointer;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-edit-description-form .inline-form-button:hover {
@@ -110,29 +116,34 @@
 .task-modal-description {
   flex: 1;
   margin-right: 20px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-description-label {
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: 600;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-body {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-actions-label {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 20px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-actions-icon {
   width: 10px;
   margin-right: 6px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-actions-action {
@@ -146,8 +157,10 @@
   margin-top: 8px;
   min-width: 130px;
   padding: 6px 12px;
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
 
 .task-modal-actions-action:hover {
   background-color: rgba(9, 30, 66, 0.08);
+  font-family: var(--font-family-display,"Charlie Display",sans-serif);
 }
